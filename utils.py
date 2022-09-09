@@ -2,11 +2,13 @@ import json
 import googleapiclient.discovery
 import json
 import logging
-from pytube import YouTube as yt_youtube
+
 import boto3
 
 # api_key = 'AIzaSyCARkUF_v4pNmyQFMbuQ_XBpiuE0ofvD_Y'
-api_key = 'AIzaSyAwjigDbbAlx1boxpbHL08Nx774OsVQyjQ'
+# api_key = 'AIzaSyAwjigDbbAlx1boxpbHL08Nx774OsVQyjQ'
+api_key = 'AIzaSyB1hJWOCnKwHs9r3_dxzPCxzvsEEsSVA9I'
+
 s3 = boto3.resource('s3')
 BUCKET = "Youtube-Anamika"
 
@@ -22,8 +24,9 @@ def search_videos(youtube, channel_id, page_token):
     request = youtube.search().list(
         part="snippet",
         channelId=channel_id,
+        # channelId = ','.join(channel_id),
         type="video",
-        pageToken=page_token
+        pageToken=None
     )
     response = request.execute()
     return response

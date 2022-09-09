@@ -3,10 +3,12 @@ import googleapiclient.discovery
 import json
 import logging
 from pytube import YouTube as yt_youtube
+import boto3
 
 # api_key = 'AIzaSyCARkUF_v4pNmyQFMbuQ_XBpiuE0ofvD_Y'
 api_key = 'AIzaSyAwjigDbbAlx1boxpbHL08Nx774OsVQyjQ'
-
+s3 = boto3.resource('s3')
+BUCKET = "Youtube-Anamika"
 
 def build_youtube(API_KEY):
     api_service_name = "youtube"

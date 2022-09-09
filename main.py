@@ -2,9 +2,10 @@ import json
 import logging
 import googleapiclient.discovery
 from pytube import YouTube as yt_youtube
-from utils import build_youtube, search_videos, search_comments, process_search_response, process_comments_response, api_key, search_statistics, process_statistics_response
+from utils import build_youtube, search_videos, search_comments, process_search_response, process_comments_response, api_key, search_statistics, process_statistics_response, s3, BUCKET
+from image import download_upload_video
 import pandas as pd
-from db_connection import cursor
+from db_connection import cursor, mydb
 
 def main(api_key):
     # READING API and CHANNEL ID from config.json
@@ -58,10 +59,11 @@ def main(api_key):
 
 
 if __name__ == '__main__':
-    comments, likes, videos = main(apikey)
+    comments, likes, videos = main(api_key)
     df_videos = pd.DataFrame.from_records(videos)
     df_videos['video_link'] = df_videos.apply(lambda row: f"https://www.youtube.com/watch?v={row['video_id']}", axis=1)
 
+    df_videos['video_url_s3'] = df_videos.apply(lambda row: download_upload_video(row['video_link'], s3, BUCKET), axis = 1)
     df_likes = pd.DataFrame.from_records(likes)
     df_merged = pd.merge(df_videos, df_likes[['video_id', 'likes']], on='video_id')
 

@@ -3,3 +3,5 @@ pytube
 pandas
 boto3
 mysql-connector
+flask
+flask_cors

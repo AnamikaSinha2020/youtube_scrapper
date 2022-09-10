@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Review Page</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+
+      <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+
+</head>
+
+<body>
+
+  <div class="table-users" style="overflow-x:auto;">
+   <div class="header">Channel Details</div>
+
+   <table id='chnl_dta' cellspacing="0" >
+      <tr>
+         <th>Channel Name</th>
+         <th>Video Title</th>
+         <th>Video Link</th>
+         <th>Video Description</th>
+         <th>Thumbnail</th>
+         <th>Likes</th>
+         <th>Video URL</th>
+         <th>Video Upload Date</th>
+<!--         <th>Commentor Name</th>-->
+<!--         <th width="230">Comments</th>-->
+      </tr>
+         {% for data in response_data %}
+      <tr>
+          <td>{{data['Channel_name']}}</td>
+         <td> {{data['Video_title']}}</a></td>
+         <td>{{data['Videao_link']}}</td>
+         <td>{{data['Video_disc']}}</td>
+         <td>{{data['Thumb_nail']}} </td>
+         <td>{{data['Likes']}} </td>
+         <td>{{data['Video_url']}} </td>
+         <td>{{data['Video_upload_date']}} </td>
+<!--         <td>{{data['Commentor_name']}} </td>-->
+<!--         <td>{{data['Comments']}} </td>-->
+      </tr>
+       {% endfor %}
+   </table>
+  <div id="pageNavPosition" class="pager-nav"></div>
+</div>
+
+
+
+</body>
+<script src="PagerJS.js" defer></script>
+<script>
+let pager = new Pager('chnl_dta', 3);
+
+pager.init();
+pager.showPageNav('chnl_dta', 'pageNavPosition');
+pager.showPage(1);
+</script>
+</html>

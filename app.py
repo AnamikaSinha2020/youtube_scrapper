@@ -6,7 +6,7 @@ from db_connection import cursor, mydb
 # from urllib.request import urlopen as uReq
 
 app = Flask(__name__)
-app.run(host='0.0.0.0', port=8000, debug=True)
+app.run(host='0.0.0.0',  debug=True)
 
 
 @app.route('/',methods=['GET'])  # route to display the home page

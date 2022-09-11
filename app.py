@@ -2,11 +2,13 @@ from flask import Flask, render_template, request,jsonify
 from flask_cors import CORS,cross_origin
 import requests
 from db_connection import cursor, mydb
+import os
 # from bs4 import BeautifulSoup as bs
 # from urllib.request import urlopen as uReq
 
 app = Flask(__name__)
-app.run(debug=True)
+port1 = int(os.environ.get('PORT', 5000))
+app.run(debug=True,port=port1)
 
 
 @app.route('/',methods=['GET'])  # route to display the home page

@@ -90,7 +90,6 @@ def get_cmnt(video_id):
     return render_template("get_comments.html", response_data=response_data)
 
 
-
-
-app.run(host='127.0.0.1', port=8001, debug=True)
+if __name__ == "__main__":
+    app.run(host='127.0.0.1', port=8001, debug=True)
    

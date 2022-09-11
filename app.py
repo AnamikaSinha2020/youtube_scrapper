@@ -7,8 +7,7 @@ import os
 # from urllib.request import urlopen as uReq
 
 app = Flask(__name__)
-port1 = int(os.environ.get('PORT', 5000))
-app.run(debug=True,port=port1)
+
 
 
 @app.route('/',methods=['GET'])  # route to display the home page
@@ -92,5 +91,6 @@ def get_cmnt(video_id):
 
 
 
-app.run(host='0.0.0.0', port=8000, debug=True)
+
+app.run(host='127.0.0.1', port=8001, debug=True)
    

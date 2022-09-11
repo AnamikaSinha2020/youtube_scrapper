@@ -25,9 +25,9 @@ def search_videos(youtube, channel_id, page_token):
     request = youtube.search().list(
         part="snippet",
         channelId=channel_id,
-        # channelId = ','.join(channel_id),
         type="video",
-        pageToken=None
+        maxResults=50,
+        order="date"
     )
     response = request.execute()
     return response
@@ -37,7 +37,8 @@ def search_comments(youtube, video_id, page_token):
     request = youtube.commentThreads().list(
         part="snippet",
         videoId=video_id,
-        pageToken=page_token
+        maxResults=10,
+        order="time",
     )
 
     response = request.execute()
@@ -46,7 +47,8 @@ def search_comments(youtube, video_id, page_token):
 
 
 def process_search_response(response):
-    next_page_token = response.get('nextPageToken')
+#     next_page_token = response.get('nextPageToken')
+    next_page_token = None
     result = []
     for i, item in enumerate(response["items"]):
         video_id = item["id"]["videoId"]
@@ -66,8 +68,9 @@ def process_search_response(response):
     return next_page_token, result
 
 
+
 def process_comments_response(response, video):
-    next_page_token = response.get('nextPageToken')
+    next_page_token = None
     result = []
     for i, item in enumerate(response["items"]):
         comment = item["snippet"]["topLevelComment"]

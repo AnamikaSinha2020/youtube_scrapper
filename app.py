@@ -22,13 +22,14 @@ def get():
     # query =f"Select * from YTscraper.Video_tbl where channel_id = '{channel_id}' order by Video_upload_date desc limit 50;"
     query =f"""select vdeo.video_id, vdeo.Channel_id, chnl.Channel_name, vdeo.Video_title, 
     vdeo.Videao_link, vdeo.Video_disc, vdeo.Thumb_nail, vdeo.Likes, vdeo.Video_url, 
-    vdeo.Video_upload_date from YTscraper.Video_tbl vdeo
+    vdeo.Video_upload_date from YTscraper.Videos_tbl vdeo
     left join YTscraper.Channel_tble chnl on chnl.channel_id = vdeo.Channel_id
     where vdeo.channel_id = '{channel_id}';"""
     cursor.execute(query)
     response_data = []
 
     myresult = cursor.fetchall()
+    print("get video ==", myresult)
     for data in myresult:
         data_dict = {}
         print(data)
@@ -42,6 +43,7 @@ def get():
         data_dict['Likes'] = data[7]
         data_dict['Video_url'] = data[8]
         data_dict['Video_upload_date'] = data[9]
+        data_dict['commment_page'] = f'/get_comments/{data[0]}'
         # data_dict['Commentor_name'] = data[10]
         # data_dict['Comments'] = data[11]
 
@@ -50,24 +52,39 @@ def get():
     return render_template("get_videos.html", response_data=response_data)
 
 
-@app.route('/get_comments/<video_id>',methods=['POST'])  # route to display the home page
+@app.route('/get_comments/<video_id>',methods=['GET'])  # route to display the home page
 @cross_origin()
 def get_cmnt(video_id):
-    query = f'select * from YTscraper.Commenter_tbl where video_id ={video_id};'
+    query = f"""select vdeo.video_id, vdeo.Channel_id, chnl.Channel_name, vdeo.Video_title, 
+            vdeo.Videao_link, vdeo.Video_disc, vdeo.Thumb_nail, vdeo.Likes, vdeo.Video_url, 
+             vdeo.Video_upload_date, cmt.Commentor_name, cmt.Comments from YTscraper.Videos_tbl vdeo 
+            left join YTscraper.Commenter_tbl cmt on cmt.video_id = vdeo.video_id
+            left join YTscraper.Channel_tble chnl on chnl.channel_id = vdeo.Channel_id
+            where vdeo.video_id ='{video_id}';"""
     cursor.execute(query)
     response_data = []
 
     myresult = cursor.fetchall()
+    print("comments ")
+    print(myresult)
     for data in myresult:
         dict_comment = {}
         dict_comment['video_id'] = data[0]
-        dict_comment['Commentor_name'] = data[1]
-        dict_comment['Comments'] = data[2]
-        dict_comment['video_title'] = data[3]
+        dict_comment['Channel_id'] = data[1]
+        dict_comment['Channel_name'] = data[2]
+        dict_comment['Video_title'] = data[3]
+        dict_comment['Videao_link'] = data[4]
+        dict_comment['Video_disc'] = data[5]
+        dict_comment['Thumb_nail'] = data[6]
+        dict_comment['Likes'] = data[7]
+        dict_comment['Video_url'] = data[8]
+        dict_comment['Video_upload_date'] = data[9]
+        dict_comment['Commentor_name'] = data[10]
+        dict_comment['Comments'] = data[11]
         response_data.append(dict_comment)
+    print(response_data)
 
-
-    return render_template("index.html", response_data=response_data)
+    return render_template("get_comments.html", response_data=response_data)
 
 
 

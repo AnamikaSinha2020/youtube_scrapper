@@ -17,48 +17,28 @@
 <body>
 
   <div class="table-users" style="overflow-x:auto;">
-   <div class="header">Channel Details</div>
+   <div class="header">{{response_data[0]['Channel_name']}}</div>
 
    <table id='chnl_dta' cellspacing="0" >
       <tr>
-         <th>Channel Name</th>
-         <th>Video Title</th>
-         <th>Video Link</th>
-         <th>Video Description</th>
-         <th>Thumbnail</th>
-         <th>Likes</th>
-         <th>Video URL</th>
          <th>Video Upload Date</th>
-<!--         <th>Commentor Name</th>-->
-<!--         <th width="230">Comments</th>-->
+        <th>Video link</th>
+         <th>Video Title</th>
+         <th>Video Description</th>
       </tr>
          {% for data in response_data %}
       <tr>
-          <td>{{data['Channel_name']}}</td>
-         <td> {{data['Video_title']}}</a></td>
-         <td>{{data['Videao_link']}}</td>
-         <td>{{data['Video_disc']}}</td>
-         <td>{{data['Thumb_nail']}} </td>
-         <td>{{data['Likes']}} </td>
-         <td>{{data['Video_url']}} </td>
-         <td>{{data['Video_upload_date']}} </td>
-<!--         <td>{{data['Commentor_name']}} </td>-->
-<!--         <td>{{data['Comments']}} </td>-->
+          <td style="text-align:left;">{{data['Video_upload_date']}} </td>
+          <td style="text-align:left;"><a href ="{{data['commment_page']}}"><img src="{{data['Thumb_nail']}}"></a></td>
+         <td style="text-align:left;"> {{data['Video_title']}}</td>
+         <td style="text-align:left;">{{data['Video_disc']}}</td>
       </tr>
        {% endfor %}
    </table>
-  <div id="pageNavPosition" class="pager-nav"></div>
 </div>
 
 
 
 </body>
-<script src="PagerJS.js" defer></script>
-<script>
-let pager = new Pager('chnl_dta', 3);
 
-pager.init();
-pager.showPageNav('chnl_dta', 'pageNavPosition');
-pager.showPage(1);
-</script>
 </html>

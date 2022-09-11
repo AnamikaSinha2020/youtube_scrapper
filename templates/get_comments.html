@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Review Page</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+
+      <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+
+</head>
+
+<body>
+   <div class="header">{{response_data[0]['Channel_name']}}</div>
+
+    <center><video width="320" height="240"  controls>
+  <source src= {{response_data[0]['Video_url']}} type="video/mp4" >
+  <source src="movie.ogg" type="video/ogg"></cener>
+    Your browser does not support the video tag.
+</video>
+  <div class="table-users" style="overflow-x:auto;">
+  <table id='video_desc' cellspacing="0" >
+
+      <tr>
+           <td>Video Title </td>
+            <td>{{response_data[0]['Video_title']}} </td>
+      </tr>
+      <tr>
+          <td>Video Description </td>
+          <td>{{response_data[0]['Video_disc']}} </td>
+      </tr>
+
+      <tr>
+          <td>Likes </td>
+          <td>{{response_data[0]['Likes']}} </td>
+      </tr>
+
+
+  </table>
+    <br/>
+      <br/>
+   <table id='chnl_dta' cellspacing="0" >
+      <tr>
+         <th>Commenter</th>
+         <th>Comments</th>
+
+      </tr>
+
+         {% for data in response_data %}
+      <tr>
+         <td>{{data['Commentor_name']}} </td>
+         <td>{{data['Comments']}} </td>
+      </tr>
+       {% endfor %}
+   </table>
+</div>
+
+
+
+</body>
+
+</html>

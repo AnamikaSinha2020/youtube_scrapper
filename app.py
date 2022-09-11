@@ -2,10 +2,13 @@ from flask import Flask, render_template, request,jsonify
 from flask_cors import CORS,cross_origin
 import requests
 from db_connection import cursor, mydb
+import os
 # from bs4 import BeautifulSoup as bs
 # from urllib.request import urlopen as uReq
 
 app = Flask(__name__)
+
+
 
 @app.route('/',methods=['GET'])  # route to display the home page
 @cross_origin()
@@ -87,7 +90,7 @@ def get_cmnt(video_id):
     return render_template("get_comments.html", response_data=response_data)
 
 
-
 if __name__ == "__main__":
-    app.run(host='127.0.0.1', port=8001, debug=True)
-	# app.run(debug=True)
+    #app.run(host='127.0.0.1', port=8001, debug=True)
+    app.run(debug=True)
+   

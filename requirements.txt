@@ -6,3 +6,4 @@ mysql-connector
 flask
 flask_cors
 requests
+gunicorn

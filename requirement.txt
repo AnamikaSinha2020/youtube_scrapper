@@ -1,8 +1,11 @@
 google-api-python-client
 pytube
 pandas
+mysql-connector-python
+boto3
 boto3
 mysql-connector
 flask
 flask_cors
+requests
 requests

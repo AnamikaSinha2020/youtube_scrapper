@@ -25,7 +25,7 @@ def get():
     # query =f"Select * from YTscraper.Video_tbl where channel_id = '{channel_id}' order by Video_upload_date desc limit 50;"
     query =f"""select vdeo.video_id, vdeo.Channel_id, chnl.Channel_name, vdeo.Video_title, 
     vdeo.Videao_link, vdeo.Video_disc, vdeo.Thumb_nail, vdeo.Likes, vdeo.Video_url, 
-    vdeo.Video_upload_date from YTscraper.Videos_tbl vdeo
+    vdeo.Video_upload_date from YTscraper.Video_tbl vdeo
     left join YTscraper.Channel_tble chnl on chnl.channel_id = vdeo.Channel_id
     where vdeo.channel_id = '{channel_id}';"""
     cursor.execute(query)
@@ -60,7 +60,7 @@ def get():
 def get_cmnt(video_id):
     query = f"""select vdeo.video_id, vdeo.Channel_id, chnl.Channel_name, vdeo.Video_title, 
             vdeo.Videao_link, vdeo.Video_disc, vdeo.Thumb_nail, vdeo.Likes, vdeo.Video_url, 
-             vdeo.Video_upload_date, cmt.Commentor_name, cmt.Comments from YTscraper.Videos_tbl vdeo 
+             vdeo.Video_upload_date, cmt.Commentor_name, cmt.Comments from YTscraper.Video_tbl vdeo 
             left join YTscraper.Commenter_tbl cmt on cmt.video_id = vdeo.video_id
             left join YTscraper.Channel_tble chnl on chnl.channel_id = vdeo.Channel_id
             where vdeo.video_id ='{video_id}';"""

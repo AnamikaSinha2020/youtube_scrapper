@@ -2,8 +2,8 @@ import boto3
 from pytube import YouTube as yt_youtube
 
 s3 = boto3.resource('s3',
-                   aws_access_key_id='AKIA2C2WNLJEUTTGTD6H',
-                   aws_secret_access_key='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')
+                   aws_access_key_id='create s3 access key',
+                   aws_secret_access_key='create s3 secrate access key')
 BUCKET = "youtubevideo-anamika"
 
 # s3.Bucket(BUCKET).upload_file("/Users/manishsinha/Desktop/Avyan.jpeg", "Avyan2.jpeg")
